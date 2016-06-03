@@ -1,8 +1,6 @@
 #pragma once
 
-//
-// 迭代器的型别
-//
+// 5种迭代器的型别、方便识别类型、方便类型萃取
 struct InputIteratorTag {};
 struct OutputIteratorTag {};
 struct ForwardIteratorTag : public InputIteratorTag {};
@@ -21,9 +19,8 @@ struct Iterator
 };
 
 
-//
 // Traits 就像一台“特性萃取机”，榨取各个迭代器的特性（对应的型别）
-//
+
 template <class Iterator>
 struct IteratorTraits
 {
@@ -34,9 +31,8 @@ struct IteratorTraits
 	typedef typename Iterator:: Reference         Reference;
 };
 
-//
 // 偏特化原生指针类型
-//
+
 template <class T>
 struct IteratorTraits< T*>
 {
@@ -113,10 +109,10 @@ inline void _Advance(InputIterator& i, size_t n, ForwardIteratorTag) {
 
 template <class InputIterator>
 inline void _Advance(InputIterator& i, int n, BidirectionalIteratorTag) {
-	if (n > 0)
-	{}
+	if (n >= 0)
+		while (n--) ++i;
 	else
-	{}
+		while (n++) --i;
 }
 
 
@@ -151,7 +147,6 @@ public:
 	ReverseIterator() {}
 	explicit ReverseIterator(IteratorType x) : _current(x) {}
 
-	// ?
 	Reference operator*() const {
 		Iterator tmp = _current;
 		return *--tmp;
