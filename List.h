@@ -17,6 +17,8 @@ struct __ListNode
 	}
 };
 
+//先实现迭代器
+
 template<class T, class Ref, class Ptr>
 struct __ListIterator
 {
@@ -87,11 +89,11 @@ public:
 		return _node != it._node;
 	}
 
-//protected:
+protected:
 	LinkType _node;
 };
 
-
+//实现list
 template<class T>
 class List
 {
@@ -110,18 +112,6 @@ public:
 		_head->_next = _head;
 		_head->_prev = _head;
 	}
-
-	/*void PushBack(const T& x)
-	{
-		LinkType tail = _head->_prev;
-		LinkType tmp = new Node(x);
-		tail->_next = tmp;
-		tmp->_prev = tail;
-		tail = tmp;
-
-		_head->_prev = tail;
-		tail->_next = _head;
-	}*/
 
 	Iterator Begin()
 	{
@@ -209,13 +199,10 @@ public:
 		Erase(Begin());
 	}
 
-	void Reverse();
-	void Merge(List<T>& list);
-	void Unique();
 
 protected:
-	LinkType _head;
-	//Node _head;
+
+	LinkType _head;//供迭代器end使用
 };
 
 void PrintList1(const List<int>& l)
@@ -223,8 +210,6 @@ void PrintList1(const List<int>& l)
 	List<int>::ConstIterator it = l.Begin();
 	while (it != l.End())
 	{
-		//cout<<*it<<" ";
-		//*it = 10;
 		cout<<*it<<" ";
 
 		++it;
