@@ -1,12 +1,6 @@
 #pragma once
 #include <assert.h>
 
-//template<class T>
-//struct __VectorIterator
-//{
-//protected:
-//	T* ptr;
-//};
 
 template<class T>
 class Vector
@@ -31,8 +25,7 @@ public:
 	}
 
 	void PopBack();
-	// 在前面插入一个数据x
-	void Insert(Iterator pos, const ValueType& x);
+	void Insert(Iterator pos, const ValueType& x);// 在pos前面插入一个数据x
 	void Erase(Iterator pos);
 
 	Iterator Begin()
@@ -65,7 +58,7 @@ protected:
 			size_t storage = oldStorage*2 + 3;
 
 			ValueType* tmp = new ValueType[storage];
-			for (size_t i = 0; i < oldStorage; ++i)
+			for (size_t i = 0; i < oldStorage; ++i)//就不类型萃取了统一采用for拷贝
 			{
 				tmp[i] = _start[i];
 			}
