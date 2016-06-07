@@ -32,7 +32,7 @@ struct __TypeTraits
 	typedef __FalseType	   IsPODType;
 };
 
-// 特化
+// 偏特化
 template <>
 struct __TypeTraits< bool>
 {
